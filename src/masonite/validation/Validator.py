@@ -637,9 +637,12 @@ class contains(BaseValidation):
 class is_in(BaseValidation):
     def __init__(self, validations, value="", messages={}, raises={}):
         super().__init__(validations, messages=messages, raises=raises)
-        self.value = value
+        self.value = self.value = [v.strip() for v in value.split(',') if v.strip()]
 
     def passes(self, attribute, key, dictionary):
+        print(attribute)
+        print(self.value)
+        print(type(self.value))
         return attribute in self.value
 
     def message(self, attribute):
